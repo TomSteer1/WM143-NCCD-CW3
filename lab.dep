@@ -1,0 +1,23 @@
+Staff-Firewall: Main-Firewall
+Staff-CC:	Staff-Firewall 
+Staff-FI: Staff-Firewall
+Staff-HR: Staff-Firewall
+Staff-SA: Staff-Firewall
+Staff-Printer: Staff-Firewall
+
+Database-Firewall: Main-Firewall
+Database: Database-Firewall
+
+EDMZ-Firewall: Main-Firewall
+Squid: EDMZ-Firewall
+Mail: EDMZ-Firewall
+OpenVPN: EDMZ-Firewall
+Int-WWW: EDMZ-Firewall
+
+IDMZ-Firewall: Main-Firewall
+LDAP: IDMZ-Firewall
+INT-DNS: IDMZ-Firewall
+
+SysAdmin-Firewall: Main-Firewall
+SysAdmin: SysAdmin-Firewall
+
