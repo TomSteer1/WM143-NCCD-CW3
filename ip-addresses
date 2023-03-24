@@ -1,16 +1,55 @@
-Ext-DNS eth0 8.8.8.8/24
-Ext-Office eth0 22.39.224.18/30
-Ext-WWW eth0 201.224.19.7/16
-Int-DNS eth0 80.64.41.131/16
-Internet eth0 201.224.131.22/16
-Internet eth1 8.8.8.1/24
-Internet eth2 22.39.224.17/30
-Internet eth3 80.64.157.254/16
-Int-WWW eth0 80.64.98.155/16
-LDAP eth0 80.64.34.21/16
-Mail eth0 80.64.139.114/16
-OpenVPN eth0 80.64.89.215/16
-Squid eth0 80.64.37.201/16
-Staff-1 eth0 80.64.81.121/16
-Staff-2 eth0 80.64.69.201/16
-Staff-3 eth0 80.64.99.159/16
+--- Internet --- 
+Internet eth0 201.224.131.22
+Internet eth1 8.8.8.1
+Internet eth2 22.39.224.17
+Internet eth3 80.64.157.254
+
+--- External DMZ --- 
+Int-WWW eth0 10.1.0.1
+Mail eth0 10.1.0.2
+OpenVPN eth0 10.1.0.3
+Squid eth0 10.1.0.5
+EDMZ-Firewall eth0 10.0.0.0.1
+EDMZ-Firewall eth1 10.1.0.6
+
+--- Enterprise ---
+Staff-Firewall eth0 10.0.0.2
+
+-- HR --
+Staff-HR eth0 10.2.0.1
+Staff-Firewall eth1 10.2.3.254
+
+-- Corprate Comms -- 
+Staff-CC eth0 10.2.4.1
+Staff-Firewall eth2 10.2.7.254
+
+-- System Administration --
+Staff-SA eth0 10.2.8.1
+Staff-Firewall eth3 10.2.11.254
+
+-- Finance -- 
+Staff-FI eth0 10.2.12.1
+Staff-Firewall eth4 10.2.15.254
+
+-- Printers/IOT -- 
+Staff-Printer eth0 10.2.16.1
+Staff-Firewall eth5 10.2.19.254
+
+--- Extranet --- 
+
+
+--- Internal DMZ --- 
+Int-DNS eth0 10.4.0.1
+LDAP eth0 10.4.0.2
+IDMZ-Firewall eth0 10.0.0.4
+IDMZ-Firewall eth1 10.4.0.6
+
+--- Management ---
+SysAdmin eth0 10.5.0.1
+SysAdmin-Firewall eth0 10.0.0.5
+SysAdmin-Firewall eth1 10.5.0.6
+
+--- Restricted ---
+Database eth0 10.6.0.1
+Database-Firewall eth0 10.0.0.6
+Database-Firewall eth1  10.6.0.6
