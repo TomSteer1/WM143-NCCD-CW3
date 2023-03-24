@@ -8,16 +8,17 @@ ip link set up dev eth1
 
 ip route add default via 80.64.157.254 dev eth1
 
-# Set default rules to drop all 
+## Internal Routes
 
-iptables -F
-iptables -P FORWARD DROP
+ip route add 10.1.0.0/29 via 10.0.0.1
+ip route add 10.2.0.0/19 via 10.0.0.2
+ip route add 10.3.0.0/21 via 10.0.0.3
+ip route add 10.4.0.0/29 via 10.0.0.4
+ip route add 10.5.0.0/29 via 10.0.0.5
+ip route add 10.6.0.0/29 via 10.0.0.6
 
-# Forward traffic from internal networks
-
-iptables -A FORWARD -i eth0 -o eth0 -j ACCEPT
-
+# SNAT to external interaction IP
 
 iptables -t nat -A POSTROUTING \
-	-o eth1
-	-j MASQUERADE
+	-o eth1 \
+	-j SNAT --to 80.64.81.121
