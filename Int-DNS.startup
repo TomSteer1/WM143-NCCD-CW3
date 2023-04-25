@@ -3,3 +3,8 @@ ip link set up dev eth0
 ip route add default via 10.4.0.6 dev eth0
 chmod +r /etc/dnsmasq_static_hosts.conf
 systemctl start dnsmasq
+
+
+
+
+

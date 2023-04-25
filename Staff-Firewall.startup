@@ -13,3 +13,23 @@ ip link set up dev eth4
 ip link set up dev eth5
 
 ip route add default via 10.0.0.14 dev eth0
+
+iptables -F 
+iptables -P FORWARD DROP
+iptables -P INPUT DROP
+
+# Allow all traffic from the internal network
+iptables -A FORWARD -i eth1 -j ACCEPT
+iptables -A FORWARD -i eth2 -j ACCEPT
+iptables -A FORWARD -i eth3 -j ACCEPT
+iptables -A FORWARD -i eth4 -j ACCEPT
+iptables -A FORWARD -i eth5 -j ACCEPT
+
+# Stateful firewall rules
+iptables -A INPUT -m state --state ESTABLISHED,RELATED -j ACCEPT
+iptables -A FORWARD -m state --state ESTABLISHED,RELATED -j ACCEPT
+
+# Only allow forward from higher trust networks
+iptables -A FORWARD -i eth0 -s 10.6.0.0/29 -j ACCEPT
+iptables -A FORWARD -i eth0 -s 10.5.0.0/29 -j ACCEPT
+iptables -A FORWARD -i eth0 -s 10.4.0.0/29 -j ACCEPT 
