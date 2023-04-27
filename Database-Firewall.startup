@@ -17,4 +17,7 @@ iptables -A INPUT -m state --state ESTABLISHED,RELATED -j ACCEPT
 iptables -A FORWARD -m state --state ESTABLISHED,RELATED -j ACCEPT
 
 # Only allow forward from management zone
-iptables -A FORWARD -i eth0 -s 10.5.0.0/29 -j ACCEPT
+iptables -A FORWARD -i eth0 -s 10.1.0.0/29 -j DROP
+iptables -A FORWARD -i eth0 -s 10.2.0.0/29 -j DROP
+iptables -A FORWARD -i eth0 -s 10.3.0.0/29 -j DROP
+iptables -A FORWARD -i eth0 -s 10.4.0.0/29 -j DROP

@@ -1,0 +1,87 @@
+Certificate:
+    Data:
+        Version: 3 (0x2)
+        Serial Number:
+            66:73:db:8a:ca:20:55:4a:a1:8d:13:17:d8:a9:b9:ed
+        Signature Algorithm: sha256WithRSAEncryption
+        Issuer: CN=Fido22 CA
+        Validity
+            Not Before: Apr 26 16:27:00 2023 GMT
+            Not After : Jul 29 16:27:00 2025 GMT
+        Subject: CN=fido22
+        Subject Public Key Info:
+            Public Key Algorithm: rsaEncryption
+                RSA Public-Key: (2048 bit)
+                Modulus:
+                    00:c0:ef:ad:c8:cf:a5:86:1c:b8:db:d7:0c:a7:5d:
+                    ca:71:be:be:2d:46:94:72:ea:d3:5d:11:3d:ab:5c:
+                    cc:83:f0:19:4a:53:3e:a0:f0:25:43:98:c0:ca:ad:
+                    c8:d3:26:5a:b6:7c:01:fe:8d:1e:3f:0e:8c:ef:d9:
+                    4d:4a:90:ce:6f:53:56:40:81:64:d6:4e:56:cb:58:
+                    c2:da:92:90:e1:c8:c2:4f:b1:9e:1f:c9:0c:79:f1:
+                    9c:cd:15:9e:98:1d:2e:28:d9:be:4a:1c:11:f1:a4:
+                    69:87:26:b6:d7:96:06:89:ee:51:fa:df:8e:e4:49:
+                    47:0f:ed:ed:7d:2f:de:62:8e:16:e4:1d:92:c7:48:
+                    1f:05:08:c9:03:60:2b:4b:ca:e8:e8:74:d3:89:32:
+                    58:ae:35:16:77:24:35:85:f6:ce:b5:0e:88:ca:fd:
+                    a6:79:65:2b:73:36:62:a6:bc:c0:66:4b:92:56:0e:
+                    9f:82:ab:87:41:07:82:c0:d8:14:98:41:0b:b2:26:
+                    79:2a:76:0d:9e:6c:8a:ef:e1:fe:fd:38:b4:bd:7c:
+                    fd:b5:c3:5f:da:4f:f4:fb:a1:ac:8f:9c:1e:02:27:
+                    d3:b2:14:f3:46:78:e1:76:15:20:bc:ce:5d:ef:7c:
+                    b1:8d:b5:01:85:f7:99:12:06:81:3c:c8:9d:22:82:
+                    57:8d
+                Exponent: 65537 (0x10001)
+        X509v3 extensions:
+            X509v3 Basic Constraints: 
+                CA:FALSE
+            X509v3 Subject Key Identifier: 
+                46:2F:59:5D:7E:10:64:E9:6E:7F:CF:F4:FE:E3:33:21:7E:48:B4:8A
+            X509v3 Authority Key Identifier: 
+                keyid:51:47:51:3F:9B:76:57:07:B6:BF:96:79:6B:4E:0D:D2:56:1E:79:D9
+                DirName:/CN=Fido22 CA
+                serial:6E:80:94:B5:EF:30:59:87:92:AC:F3:03:A6:8A:61:66:99:C7:1D:5A
+
+            X509v3 Extended Key Usage: 
+                TLS Web Server Authentication
+            X509v3 Key Usage: 
+                Digital Signature, Key Encipherment
+            X509v3 Subject Alternative Name: 
+                DNS:fido22
+    Signature Algorithm: sha256WithRSAEncryption
+         23:86:31:bf:bf:1e:fd:f6:b1:7f:db:0b:0b:0e:3a:33:e8:20:
+         4c:e0:20:a4:e8:71:bd:14:d9:dc:e6:87:df:cb:34:7a:ee:e5:
+         27:2a:89:9c:97:85:a7:f6:0b:bd:e6:9b:2a:82:63:87:1c:14:
+         94:8a:b8:28:f0:f0:87:7a:90:bb:9b:db:3e:6a:fc:a1:c6:40:
+         29:a7:7b:bf:32:87:ce:c2:14:da:9d:82:01:6b:ff:43:e7:78:
+         9f:b1:a8:8f:10:83:ce:fa:23:5f:c2:50:c2:78:38:1f:7b:a9:
+         c4:e8:4c:1a:7b:e0:22:1c:f0:e7:22:5c:c2:f5:6d:c2:26:06:
+         dd:9d:33:a2:61:33:d9:d5:07:54:bd:0f:d6:87:60:55:71:44:
+         ae:5c:79:e0:a6:90:62:ea:54:8b:db:83:f0:5d:d3:fd:6d:8d:
+         04:cf:e9:90:ba:d7:f0:3d:80:a0:5f:91:d1:78:86:9e:02:7c:
+         da:b4:39:5e:5a:56:a0:48:ad:29:63:d5:dc:79:e8:bb:3c:56:
+         1c:f9:35:19:4a:41:27:73:78:aa:bb:1d:62:c2:8c:e5:00:54:
+         0c:1a:32:0e:14:8d:22:f5:1e:b5:a5:1a:db:2e:fc:0d:24:54:
+         18:9a:97:8e:ca:4a:7f:bf:7b:b5:f2:49:cb:73:d1:95:83:7b:
+         7e:ce:7f:33
+-----BEGIN CERTIFICATE-----
+MIIDYzCCAkugAwIBAgIQZnPbisogVUqhjRMX2Km57TANBgkqhkiG9w0BAQsFADAU
+MRIwEAYDVQQDDAlGaWRvMjIgQ0EwHhcNMjMwNDI2MTYyNzAwWhcNMjUwNzI5MTYy
+NzAwWjARMQ8wDQYDVQQDDAZmaWRvMjIwggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAw
+ggEKAoIBAQDA763Iz6WGHLjb1wynXcpxvr4tRpRy6tNdET2rXMyD8BlKUz6g8CVD
+mMDKrcjTJlq2fAH+jR4/Dozv2U1KkM5vU1ZAgWTWTlbLWMLakpDhyMJPsZ4fyQx5
+8ZzNFZ6YHS4o2b5KHBHxpGmHJrbXlgaJ7lH6347kSUcP7e19L95ijhbkHZLHSB8F
+CMkDYCtLyujodNOJMliuNRZ3JDWF9s61DojK/aZ5ZStzNmKmvMBmS5JWDp+Cq4dB
+B4LA2BSYQQuyJnkqdg2ebIrv4f79OLS9fP21w1/aT/T7oayPnB4CJ9OyFPNGeOF2
+FSC8zl3vfLGNtQGF95kSBoE8yJ0igleNAgMBAAGjgbMwgbAwCQYDVR0TBAIwADAd
+BgNVHQ4EFgQURi9ZXX4QZOluf8/0/uMzIX5ItIowTwYDVR0jBEgwRoAUUUdRP5t2
+Vwe2v5Z5a04N0lYeedmhGKQWMBQxEjAQBgNVBAMMCUZpZG8yMiBDQYIUboCUte8w
+WYeSrPMDpophZpnHHVowEwYDVR0lBAwwCgYIKwYBBQUHAwEwCwYDVR0PBAQDAgWg
+MBEGA1UdEQQKMAiCBmZpZG8yMjANBgkqhkiG9w0BAQsFAAOCAQEAI4Yxv78e/fax
+f9sLCw46M+ggTOAgpOhxvRTZ3OaH38s0eu7lJyqJnJeFp/YLveabKoJjhxwUlIq4
+KPDwh3qQu5vbPmr8ocZAKad7vzKHzsIU2p2CAWv/Q+d4n7GojxCDzvojX8JQwng4
+H3upxOhMGnvgIhzw5yJcwvVtwiYG3Z0zomEz2dUHVL0P1odgVXFErlx54KaQYupU
+i9uD8F3T/W2NBM/pkLrX8D2AoF+R0XiGngJ82rQ5XlpWoEitKWPV3HnouzxWHPk1
+GUpBJ3N4qrsdYsKM5QBUDBoyDhSNIvUetaUa2y78DSRUGJqXjspKf797tfJJy3PR
+lYN7fs5/Mw==
+-----END CERTIFICATE-----

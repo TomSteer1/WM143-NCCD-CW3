@@ -2,6 +2,15 @@ ip addr add 10.1.0.5/29 dev eth0
 ip link set up dev eth0
 ip route add default via 10.1.0.6 dev eth0
 
+iptables -F
+iptables -P INPUT DROP
+iptables -P FORWARD DROP
+
+iptables -A INPUT -m state --state ESTABLISHED,RELATED -j ACCEPT
+
+iptables -A INPUT --protocol tcp --dport 3128 -j ACCEPT
+iptables -A INPUT --protocol tcp --dport 3129 -j ACCEPT
+
 touch /var/log/squid/access.log
 chmod 777 /var/log/squid/access.log
 systemctl start squid.service

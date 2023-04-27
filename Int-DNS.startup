@@ -1,6 +1,14 @@
 ip addr add 10.4.0.1/29 dev eth0
 ip link set up dev eth0
 ip route add default via 10.4.0.6 dev eth0
+
+iptables -F
+iptables -P INPUT DROP
+iptables -P FORWARD DROP
+
+iptables -A INPUT -m state --state ESTABLISHED,RELATED -j ACCEPT
+iptables -A INPUT --protocol udp --dport 53 -j ACCEPT
+
 chmod +r /etc/dnsmasq_static_hosts.conf
 systemctl start dnsmasq
 
