@@ -19,6 +19,8 @@ iptables -A FORWARD -m state --state ESTABLISHED,RELATED -j ACCEPT
 iptables -A FORWARD -i eth0 -d 10.4.0.1 -p udp --dport 53 -j ACCEPT
 # Don't allow FORWARD from EDMZ (except DNS)
 iptables -A FORWARD -i eth0 -s 10.1.0.0/29 -j DROP
-# Allow LDAP from IDMZ
+# Allow LDAP from Staff Network and System Admin Network
 iptables -A FORWARD -i eth0 -d 10.4.0.2 -s 10.2.0.0/19 -p tcp --dport 389 -j ACCEPT
 iptables -A FORWARD -i eth0 -d 10.4.0.2 -s 10.2.0.0/19 -p udp --dport 389 -j ACCEPT
+iptables -A FORWARD -i eth0 -d 10.4.0.2 -s 10.5.0.0/19 -p tcp --dport 389 -j ACCEPT
+iptables -A FORWARD -i eth0 -d 10.4.0.2 -s 10.5.0.0/19 -p udp --dport 389 -j ACCEPT

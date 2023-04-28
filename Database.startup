@@ -8,3 +8,9 @@ iptables -P INPUT DROP
 
 iptables -A INPUT -m state --state ESTABLISHED,RELATED -j ACCEPT
 
+iptables -A INPUT --protocol tcp -m multiport --dports 3306,3307,3308 -j ACCEPT
+
+systemctl start ncat-tcp-broker@3306
+systemctl start ncat-tcp-broker@3307
+systemctl start ncat-tcp-broker@3308
+

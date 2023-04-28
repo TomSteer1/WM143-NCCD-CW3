@@ -8,8 +8,7 @@ iptables -P FORWARD DROP
 
 iptables -A INPUT -m state --state ESTABLISHED,RELATED -j ACCEPT
 
-iptables -A INPUT --protocol tcp --dport 3128 -j ACCEPT
-iptables -A INPUT --protocol tcp --dport 3129 -j ACCEPT
+iptables -A INPUT --protocol tcp -m multiport --dports 3128,3129 -j ACCEPT
 
 touch /var/log/squid/access.log
 chmod 777 /var/log/squid/access.log

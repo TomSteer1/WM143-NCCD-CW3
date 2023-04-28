@@ -36,11 +36,7 @@ iptables -A FORWARD -m state --state ESTABLISHED,RELATED -j ACCEPT
 iptables -A INPUT -i eth1 -p icmp -j ACCEPT
 
 # Forward web traffic to the web server
-iptables -A FORWARD -i eth1 -p tcp --dport 80 -j ACCEPT
-iptables -A FORWARD -i eth1 -p tcp --dport 443 -j ACCEPT
-iptables -A FORWARD -i eth1 -p tcp --dport 25 -j ACCEPT
-iptables -A FORWARD -i eth1 -p tcp --dport 587 -j ACCEPT
-iptables -A FORWARD -i eth1 -p tcp --dport 993 -j ACCEPT
+iptables -A FORWARD -i eth1 -p tcp -m multiport --dports 80,443,25,587,993 -j ACCEPT
 iptables -A FORWARD -i eth1 -p udp --dport 1194 -j ACCEPT
 
 # Forward Internal DNS traffic to the DNS server
@@ -48,12 +44,12 @@ iptables -A FORWARD -i eth1 -p udp --dport 1194 -j ACCEPT
 
 # DNAT web traffic to the web server from webserver ip 
 iptables -t nat -A PREROUTING -d 80.64.81.121 -p tcp -j DNAT --to 10.1.0.1 --dport 80
-iptables -t nat -A PREROUTING -d 80.64.81.121 -p tcp -j DNAT --to 10.1.0.1 --dport 443 
-iptables -t nat -A PREROUTING -d 80.64.81.122 -p tcp -j DNAT --to 10.1.0.2 --dport 80
-iptables -t nat -A PREROUTING -d 80.64.81.122 -p tcp -j DNAT --to 10.1.0.2 --dport 443
+iptables -t nat -A PREROUTING -d 80.64.81.121 -p tcp -j DNAT --to 10.1.0.1 --dport 443
+# DNAT Mail Server Traffic to the Mail Server
 iptables -t nat -A PREROUTING -d 80.64.81.122 -p tcp -j DNAT --to 10.1.0.2 --dport 25 
 iptables -t nat -A PREROUTING -d 80.64.81.122 -p tcp -j DNAT --to 10.1.0.2 --dport 587 
 iptables -t nat -A PREROUTING -d 80.64.81.122 -p tcp -j DNAT --to 10.1.0.2 --dport 993
+# DNAT OpenVPN Traffic to the OpenVPN Server
 iptables -t nat -A PREROUTING -d 80.64.81.123 -p udp -j DNAT --to 10.1.0.3 --dport 1194
 # SNAT to external interaction IP
 
