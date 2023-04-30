@@ -21,8 +21,6 @@ iptables -A FORWARD -m state --state ESTABLISHED,RELATED -j ACCEPT
 iptables -A FORWARD -i eth0 -p tcp -m multiport --dports 80,443 -d 10.1.0.1 -j ACCEPT
 # Mail Server
 iptables -A FORWARD -i eth0 -p tcp -m multiport --dports 25,587,993 -d 10.1.0.2 -j ACCEPT
-# Squid Proxy
-iptables -A FORWARD -i eth0 -p tcp -m multiport --dports 3128,3129 -d 10.1.0.5 -j ACCEPT
 # OpenVPN
 iptables -A FORWARD -i eth0 -p udp --dport 1194 -d 10.1.0.3 -j ACCEPT
 

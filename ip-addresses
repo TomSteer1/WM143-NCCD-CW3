@@ -8,7 +8,6 @@ Internet eth3 80.64.157.254
 Int-WWW eth0 10.1.0.1
 Mail eth0 10.1.0.2
 OpenVPN eth0 10.1.0.3
-Squid eth0 10.1.0.5
 EDMZ-Firewall eth0 10.0.0.0.1
 EDMZ-Firewall eth1 10.1.0.6
 
@@ -41,6 +40,7 @@ Staff-Firewall eth5 10.2.19.254
 --- Internal DMZ --- 
 Int-DNS eth0 10.4.0.1
 LDAP eth0 10.4.0.2
+Squid eth0 10.4.0.3
 IDMZ-Firewall eth0 10.0.0.4
 IDMZ-Firewall eth1 10.4.0.6
 
