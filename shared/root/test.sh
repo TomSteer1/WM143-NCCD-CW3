@@ -127,6 +127,46 @@ else
 	result+="1"
 fi
 
+# Test ssh to each staff machine
+echo "Testing ssh to staff machines" 1>&2
+# HR
+nc -zv -w 2 10.2.0.1 22
+if [ $? -ne 0 ]; then
+	echo "Cannot reach HR machine" 1>&2
+	result+="0"
+else
+	echo "Can reach HR machine" 1>&2
+	result+="1"
+fi
+# CC
+nc -zv -w 2 10.2.4.1 22
+if [ $? -ne 0 ]; then
+	echo "Cannot reach CC machine" 1>&2
+	result+="0"
+else
+	echo "Can reach CC machine" 1>&2
+	result+="1"
+fi
+# SA
+nc -zv -w 2 10.2.8.1 22
+if [ $? -ne 0 ]; then
+	echo "Cannot reach System Admin machine" 1>&2
+	result+="0"
+else
+	echo "Can reach System Admin machine" 1>&2
+	result+="1"
+fi
+# Finance
+nc -zv -w 2 10.2.12.1 22
+if [ $? -ne 0 ]; then
+	echo "Cannot reach finance machine" 1>&2
+	result+="0"
+else
+	echo "Can reach finance machine" 1>&2
+	result+="1"
+fi
+
+
 echo "Test script complete" 1>&2
 echo $result
 echo $result > /hostlab/_test/$(hostname).txt

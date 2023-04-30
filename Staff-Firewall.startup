@@ -18,17 +18,25 @@ iptables -F
 iptables -P FORWARD DROP
 iptables -P INPUT DROP
 
-# Allow all traffic from the internal network
-iptables -A FORWARD -i eth1 -j ACCEPT
-iptables -A FORWARD -i eth2 -j ACCEPT
-iptables -A FORWARD -i eth3 -j ACCEPT
-iptables -A FORWARD -i eth4 -j ACCEPT
-iptables -A FORWARD -i eth5 -j ACCEPT
 
 # Stateful firewall rules
 iptables -A INPUT -m state --state ESTABLISHED,RELATED -j ACCEPT
 iptables -A FORWARD -m state --state ESTABLISHED,RELATED -j ACCEPT
 
+# Block access to the management zone from anything except database zone
+iptables -A FORWARD -o eth3 -s 10.1.0.0/29 -j DROP
+iptables -A FORWARD -o eth3 -s 10.2.0.0/29 -j DROP
+iptables -A FORWARD -o eth3 -s 10.3.0.0/29 -j DROP
+iptables -A FORWARD -o eth3 -s 10.4.0.0/29 -j DROP
+
+# Forward internal traffic out
+iptables -A FORWARD -o eth0 -j ACCEPT
+# Forward traffic to printers
+iptables -A FORWARD -i eth0 -o eth5 -j DROP
+iptables -A FORWARD -o eth5 -j ACCEPT
+
 # Only allow forward from higher trust networks
 iptables -A FORWARD -i eth0 -s 10.1.0.0/29 -j DROP
-
+# Allow SSH from VPN clients and System Admins 
+iptables -A FORWARD -i eth0 -s 10.3.0.0/29 -p tcp --dport 22 -j ACCEPT
+iptables -A FORWARD -i eth3 -p tcp --dport 22 -j ACCEPT

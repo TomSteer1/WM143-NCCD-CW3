@@ -2,7 +2,7 @@
 echo "Removing previous tests" 1>&2
 rm _test/*.txt 2>/dev/null
 echo "Starting machines" 1>&2
-#lstart --tmux-detached
+lstart --tmux-detached
 echo "Machines started" 1>&2
 echo "Getting list of machines" 1>&2
 machines=$(vconnect -l | awk '{print $1}')
@@ -21,7 +21,7 @@ while [ $(ls _test | wc -l) -ne $(vconnect -l | wc -l) ]; do
 	sleep 1
 done
 echo "Stopping machines" 1>&2
-#lcrash
+lcrash
 echo "Machines stopped" 1>&2
 #echo "Results are:" 1>&2
 #for machine in $machines; do
@@ -41,6 +41,10 @@ Squid=( ) # Squid Proxy
 WebDB=( ) # Web Database
 MailDB=( ) # Mail Database
 HrDB=( ) # HR Database
+StaffHR=( ) # Staff HR Machine
+StaffCC=( ) # Staff CC Machine
+StaffSA=( ) # Staff SA Machine
+StaffFI=( ) # Staff FI Machine
 for machine in $machines; do
 	machine=${machine%:}
 	result=$(cat _test/$machine.txt)
@@ -74,10 +78,22 @@ for machine in $machines; do
 	if [ ${result:9:1} -eq 1 ]; then
 		HrDB+=($machine)
 	fi
+	if [ ${result:10:1} -eq 1 ]; then
+		StaffHR+=($machine)
+	fi
+	if [ ${result:11:1} -eq 1 ]; then
+		StaffCC+=($machine)
+	fi
+	if [ ${result:12:1} -eq 1 ]; then
+		StaffSA+=($machine)
+	fi
+	if [ ${result:13:1} -eq 1 ]; then
+		StaffFI+=($machine)
+	fi
 done
 # Prints what machines can be accessed by
 # Checks if length of array is equal to number of machines
-echo ${#ExtWWW[@]}
+count=$(ls _test | wc -l)
 if [ ${#ExtWWW[@]} -eq $count ]; then
 	echo "External Web Server can be accessed by all machines"
 else
@@ -127,5 +143,25 @@ if [ ${#HrDB[@]} -eq $count ]; then
 	echo "HR Database can be accessed by all machines"
 else
 	echo "HR Database can be accessed by ${HrDB[@]}"
+fi
+if [ ${#StaffHR[@]} -eq $count ]; then
+	echo "Staff HR Machine can be accessed by all machines"
+else
+	echo "Staff HR Machine can be accessed by ${StaffHR[@]}"
+fi
+if [ ${#StaffCC[@]} -eq $count ]; then
+	echo "Staff Corporate Comms Machine can be accessed by all machines"
+else
+	echo "Staff Corporate Comms Machine can be accessed by ${StaffCC[@]}"
+fi
+if [ ${#StaffSA[@]} -eq $count ]; then
+	echo "Staff System Admin Machine can be accessed by all machines"
+else
+	echo "Staff System Admin Machine can be accessed by ${StaffSA[@]}"
+fi
+if [ ${#StaffFI[@]} -eq $count ]; then
+	echo "Staff Finance Machine can be accessed by all machines"
+else
+	echo "Staff Finance Machine can be accessed by ${StaffFI[@]}"
 fi
 echo "Done" 1>&2

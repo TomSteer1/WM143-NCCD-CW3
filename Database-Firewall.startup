@@ -20,5 +20,5 @@ iptables -A FORWARD -m state --state ESTABLISHED,RELATED -j ACCEPT
 iptables -A FORWARD -s 10.1.0.1 -d 10.6.0.1 --protocol tcp --dport 3306 -j ACCEPT
 iptables -A FORWARD -s 10.1.0.2 -d 10.6.0.1 --protocol tcp --dport 3307 -j ACCEPT
 iptables -A FORWARD -s 10.2.0.1/22 -d 10.6.0.1 --protocol tcp --dport 3308 -j ACCEPT
-iptables -A FORWARD -s 10.5.0.1/29 -d 10.6.0.1 --protocol tcp -m multiport --dports 3306,3307,3308 -j ACCEPT
+iptables -A FORWARD -s 10.2.8.1/22 -d 10.6.0.1 --protocol tcp -m multiport --dports 3306,3307,3308 -j ACCEPT
 
