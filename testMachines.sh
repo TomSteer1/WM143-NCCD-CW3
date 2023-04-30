@@ -2,7 +2,7 @@
 echo "Removing previous tests" 1>&2
 rm _test/*.txt 2>/dev/null
 echo "Starting machines" 1>&2
-#lstart --tmux-detached
+lstart --tmux-detached
 echo "Machines started" 1>&2
 echo "Getting list of machines" 1>&2
 machines=$(vconnect -l | awk '{print $1}')
