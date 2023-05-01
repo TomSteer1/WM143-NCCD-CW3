@@ -27,3 +27,6 @@ The test results are displayed as a 0/1 in the following order:
 
 ## todo
 - [ ] Move Squid from EDMZ to IDMZ in diagrams
+- [ ] Remove System Admin network from diagrams but not from zone diagram
+- [ ] Add testing explanation to report
+- [ ] Find a way to test openvpn
