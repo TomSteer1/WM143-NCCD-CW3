@@ -94,6 +94,7 @@ done
 # Prints what machines can be accessed by
 # Checks if length of array is equal to number of machines
 count=$(ls _test | wc -l)
+echo "Test run with $count machines" > _test/results.txt
 if [ ${#ExtWWW[@]} -eq $count ]; then
 	echo "External Web Server can be accessed by all machines" | tee -a _test/results.txt
 else
