@@ -170,9 +170,9 @@ else
 	echo "Staff Finance Machine can be accessed by ${StaffFI[@]}" | tee -a _test/results.txt
 fi
 if [ ${#OpenVPN[@]} -eq $count ]; then
-	echo "OpenVPN Server can be accessed by all machines"
+	echo "OpenVPN Server can be accessed by all machines" | tee -a _test/results.txt
 else
-	echo "OpenVPN Server can be accessed by ${OpenVPN[@]}"
+	echo "OpenVPN Server can be accessed by ${OpenVPN[@]}" | tee -a _test/results.txt
 fi
 echo "Done" 1>&2
 echo "Results can also be found in _test/results.txt" 1>&2
