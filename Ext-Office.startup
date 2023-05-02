@@ -12,6 +12,8 @@ iptables -P FORWARD DROP
 
 iptables -A INPUT -m state --state ESTABLISHED,RELATED -j ACCEPT
 
+# Fix for test script (OpenVPN can't loopback the vpn service)
+echo "80.64.81.123 vpn.fido22.cyber.test" >> /etc/hosts
 
 # OpenVPN client
 
