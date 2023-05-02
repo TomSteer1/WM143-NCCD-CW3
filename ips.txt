@@ -1,35 +1,38 @@
-EXTDNS
-	Ext-DNS
-		8.8.8.8
-	Internet
-		8.8.8.1
+Listing networks...
 MODEM
 	Internet
 		80.64.157.254
 	Main-Firewall
 		80.64.81.123
-EXTWWW
-	Ext-WWW
-		201.224.19.7
-	Internet
-		201.224.131.22
-EXTOFFICE
-	Ext-Office
-		22.39.224.18
-	Internet
-		22.39.224.17
+OFFICE
+	Main-Firewall
+		10.0.0.14
+	EDMZ-Firewall
+		10.0.0.1
+	IDMZ-Firewall
+		10.0.0.4
+	Staff-Firewall
+		10.0.0.2
+	Database-Firewall
+		10.0.0.6
+EDMZ
+	Int-WWW
+		10.1.0.1
+	Mail
+		10.1.0.2
+	OpenVPN
+		10.1.0.3
+	EDMZ-Firewall
+		10.1.0.6
 IDMZ
 	IDMZ-Firewall
 		10.4.0.6
+	Squid
+		10.4.0.3
 	LDAP
 		10.4.0.2
 	Int-DNS
 		10.4.0.1
-HR
-	Staff-Firewall
-		10.2.3.254
-	Staff-HR
-		10.2.0.1
 CC
 	Staff-Firewall
 		10.2.7.254
@@ -40,6 +43,16 @@ SA
 		10.2.11.254
 	Staff-SA
 		10.2.8.1
+EXTWWW
+	Ext-WWW
+		201.224.19.7
+	Internet
+		201.224.131.22
+EXTOFFICE
+	Ext-Office
+		22.39.224.18
+	Internet
+		22.39.224.17
 FI
 	Staff-Firewall
 		10.2.15.254
@@ -50,37 +63,18 @@ PR
 		10.2.19.254
 	Staff-Printer
 		10.2.16.1
-EDMZ
-	Squid
-		10.1.0.5
-	Int-WWW
-		10.1.0.1
-	Mail
-		10.1.0.2
-	OpenVPN
-		10.1.0.3
-	EDMZ-Firewall
-		10.1.0.6
-SysA
-	SysAdmin-Firewall
-		10.5.0.6
-	SysAdmin
-		10.5.0.1
 DB
 	Database-Firewall
 		10.6.0.6
 	Database
 		10.6.0.1
-OFFICE
-	Main-Firewall
-		10.0.0.14
-	EDMZ-Firewall
-		10.0.0.1
-	IDMZ-Firewall
-		10.0.0.4
+EXTDNS
+	Ext-DNS
+		8.8.8.8
+	Internet
+		8.8.8.1
+HR
 	Staff-Firewall
-		10.0.0.2
-	SysAdmin-Firewall
-		10.0.0.5
-	Database-Firewall
-		10.0.0.6
+		10.2.3.254
+	Staff-HR
+		10.2.0.1
