@@ -69,7 +69,7 @@ fi
 
 # Test if the machine can reach the internal dns
 echo "Testing internal dns" 1>&2
-host -t a www.fido22.cyber.test | grep "has address" 1>&2
+host -t a www.fido22.cyber.test 10.4.0.1 | grep "has address" 1>&2
 if [ $? -ne 0 ]; then
 	echo "Cannot reach internal dns" 1>&2
 	result+="0"
