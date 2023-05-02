@@ -45,6 +45,7 @@ StaffHR=( ) # Staff HR Machine
 StaffCC=( ) # Staff CC Machine
 StaffSA=( ) # Staff SA Machine
 StaffFI=( ) # Staff FI Machine
+OpenVPN=( ) # OpenVPN Server
 for machine in $machines; do
 	machine=${machine%:}
 	result=$(cat _test/$machine.txt)
@@ -89,6 +90,9 @@ for machine in $machines; do
 	fi
 	if [ ${result:13:1} -eq 1 ]; then
 		StaffFI+=($machine)
+	fi
+	if [ ${result:14:1} -eq 1 ]; then
+		OpenVPN+=($machine)
 	fi
 done
 # Prints what machines can be accessed by
@@ -163,5 +167,10 @@ if [ ${#StaffFI[@]} -eq $count ]; then
 	echo "Staff Finance Machine can be accessed by all machines"
 else
 	echo "Staff Finance Machine can be accessed by ${StaffFI[@]}"
+fi
+if [ ${#OpenVPN[@]} -eq $count ]; then
+	echo "OpenVPN Server can be accessed by all machines"
+else
+	echo "OpenVPN Server can be accessed by ${OpenVPN[@]}"
 fi
 echo "Done" 1>&2

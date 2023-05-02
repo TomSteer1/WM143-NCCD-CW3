@@ -36,10 +36,6 @@ else
 	result+="1"
 fi
 
-# Test if the machine can reach the vpn server
-#echo "Testing vpn server" 1>&2
-#nc -z -w 2 vpn.fido22.cyber.test 1194 
-
 # Test if the machine can reach the mail server
 echo "Testing mail server" 1>&2
 nc -zv -w 2 mail.fido22.cyber.test 25
@@ -62,9 +58,8 @@ echo "Testing ldap server" 1>&2
 nc -zv -w 2 ldap.fido22.cyber.test 389
 port389=$?
 # UDP 389 echo check
-echo "LDAP Test" | nc -u -w 2 ldap.fido22.cyber.test 389 | grep "LDAP Test" 1>&2
-port389u=$?
-if [ $port389 -ne 0 ] || [ $port389u -ne 0 ]; then
+ldapresult=$(echo "LDAP Test" | nc -u -w 2 ldap.fido22.cyber.test 389 | grep "LDAP Test")
+if [ $port389 -ne 0 ] || [[ $ldapresult != "LDAP Test" ]]; then
 	echo "Cannot reach ldap server" 1>&2
 	result+="0"
 else
@@ -141,10 +136,10 @@ fi
 # CC
 nc -zv -w 2 10.2.4.1 22
 if [ $? -ne 0 ]; then
-	echo "Cannot reach CC machine" 1>&2
+	echo "Cannot reach Corporate Comms machine" 1>&2
 	result+="0"
 else
-	echo "Can reach CC machine" 1>&2
+	echo "Can reach Corporate Comms machine" 1>&2
 	result+="1"
 fi
 # SA
@@ -159,13 +154,21 @@ fi
 # Finance
 nc -zv -w 2 10.2.12.1 22
 if [ $? -ne 0 ]; then
-	echo "Cannot reach finance machine" 1>&2
+	echo "Cannot reach Finance machine" 1>&2
 	result+="0"
 else
-	echo "Can reach finance machine" 1>&2
+	echo "Can reach Finance machine" 1>&2
 	result+="1"
 fi
-
+# OpenVPN Server
+vpnresult=$(nmap -p 1194 -sU -Pn vpn.fido22.cyber.test | grep "openvpn")
+if [[ $vpnresult != "1194/udp open  openvpn" ]]; then
+	echo "Cannot reach OpenVPN Server" 1>&2
+	result+="0"
+else
+	echo "Can reach OpenVPN Server" 1>&2
+	result+="1"
+fi
 
 echo "Test script complete" 1>&2
 echo $result
