@@ -170,6 +170,19 @@ else
 	result+="1"
 fi
 
+echo "IMCP Tests" 1>&2
+IPs=("8.8.8.8" "22.39.224.18" "201.224.19.7" "10.6.0.1" "10.4.0.1" "10.1.0.1" "10.4.0.2" "10.1.0.2" "10.1.0.3" "10.4.0.3" "10.2.4.1" "10.2.12.1" "10.2.0.1" "10.2.8.1" "10.2.16.1")
+for ip in "${IPs[@]}"; do 
+	pingresult=$(ping -c 1 -W 0.5 -q $ip | awk '/transmitted/ {print $4}')
+	if [ $pingresult -ne 1 ]; then
+		echo "Cannot reach $ip" 1>&2
+		result+="0"
+	else
+		echo "Can reach $ip" 1>&2
+		result+="1"
+	fi
+done
+
 echo "Test script complete" 1>&2
 echo $result
 echo $result > /hostlab/_test/$(hostname).txt
