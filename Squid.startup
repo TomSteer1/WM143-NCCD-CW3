@@ -7,8 +7,6 @@ iptables -P INPUT DROP
 iptables -P FORWARD DROP
 
 iptables -A INPUT -m state --state ESTABLISHED,RELATED -j ACCEPT
-# Block traffic from the rest of idmz
-iptables -A INPUT -s 10.4.0.0/29 -j DROP
 iptables -A INPUT --protocol tcp -m multiport --dports 3128,3129 -j ACCEPT
 
 touch /var/log/squid/access.log
