@@ -169,6 +169,16 @@ else
 	echo "Can reach OpenVPN Server" 1>&2
 	result+="1"
 fi
+# Staff Printer
+udpnmapcount=$(nmap -p 53,137,161,5353 -sU -Pn 10.2.16.1 | grep "open " | wc -l)
+tcpnmapcount=$(nmap -p 53,139,443,515,631,9100,9101,9102 -Pn 10.2.16.1 | grep "open " | wc -l)
+if [ $udpnmapcount -ne 4 ] || [ $tcpnmapcount -ne 8 ]; then
+	echo "Cannot reach Staff Printer" 1>&2
+	result+="0"
+else
+	echo "Can reach Staff Printer" 1>&2
+	result+="1"
+fi
 
 echo "IMCP Tests" 1>&2
 IPs=("8.8.8.8" "22.39.224.18" "201.224.19.7" "10.6.0.1" "10.4.0.1" "10.1.0.1" "10.4.0.2" "10.1.0.2" "10.1.0.3" "10.4.0.3" "10.2.4.1" "10.2.12.1" "10.2.0.1" "10.2.8.1" "10.2.16.1")

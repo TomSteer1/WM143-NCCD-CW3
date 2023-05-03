@@ -23,31 +23,10 @@ done
 echo "Stopping machines" 1>&2
 lcrash 1>/dev/null
 echo "Machines stopped" 1>&2
-#echo "Results are:" 1>&2
-#for machine in $machines; do
-	# Remove colon from machine name
-#	machine=${machine%:}
-#	echo "$machine: $(cat _test/$machine.txt)" 1>&2
-#done
 echo "Parsing results" 1>&2
 # Parse Results into arrays of machine names each represented by a bit in the result
 outputs=()
-ExtWWW=( ) # External Web Server
-ExtDNS=( ) # External DNS Server
-IntWWW=( ) # Internal Web Server
-Mail=( ) # Mail Server
-LDAP=( ) # LDAP Server
-IntDNS=( ) # Internal DNS Server
-Squid=( ) # Squid Proxy
-WebDB=( ) # Web Database
-MailDB=( ) # Mail Database
-HrDB=( ) # HR Database
-StaffHR=( ) # Staff HR Machine
-StaffCC=( ) # Staff CC Machine
-StaffSA=( ) # Staff SA Machine
-StaffFI=( ) # Staff FI Machine
-OpenVPN=( ) # OpenVPN Server
-machineNames=("External Web Server" "External DNS Server" "Internal Web Server" "Mail Server" "LDAP Server" "Internal DNS Server" "Squid Proxy" "Web Database" "Mail Database" "HR Database" "Staff HR Machine" "Staff CC Machine" "Staff SA Machine" "Staff FI Machine" "OpenVPN Server")
+machineNames=("External Web Server" "External DNS Server" "Internal Web Server" "Mail Server" "LDAP Server" "Internal DNS Server" "Squid Proxy" "Web Database" "Mail Database" "HR Database" "Staff HR Machine" "Staff CC Machine" "Staff SA Machine" "Staff FI Machine" "OpenVPN Server" "Staff Printer")
 length=${#machineNames[@]}
 for machine in $machines; do
 	machine=${machine%:}
@@ -75,7 +54,7 @@ for machine in $machines; do
 	machine=${machine%:}
 	result=$(cat _test/$machine.txt)
 	pings="" 
-	offset=15
+	offset=16
 	for (( j=0; j<${length}; j++ ));
 	do
 		if [ ${result:$j+$offset:1} -eq 1 ]; then
