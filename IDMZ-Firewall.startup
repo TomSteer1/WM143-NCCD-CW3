@@ -9,8 +9,12 @@ iptables -P FORWARD DROP
 iptables -P INPUT DROP
 iptables -P OUTPUT DROP
 
-# Allow FORWARD from intenral to external
-iptables -A FORWARD -i eth1 -j ACCEPT
+# Allow FORWARD from internal to rest of network
+iptables -A FORWARD -o eth0 -d 10.0.0.0/8 -j ACCEPT
+# Allow external traffic from squid
+iptables -A FORWARD -o eth0 -s 10.4.0.3 -j ACCEPT
+# Allow external dns requests
+iptables -A FORWARD -o eth0 -s 10.4.0.1 -p udp --dport 53 -j ACCEPT 
 
 # Stateful firewall rules
 iptables -A INPUT -m state --state ESTABLISHED,RELATED -j ACCEPT
@@ -27,3 +31,4 @@ iptables -A FORWARD -i eth0 -d 10.4.0.2 -s 10.2.0.0/19 -p tcp --dport 389 -j ACC
 iptables -A FORWARD -i eth0 -d 10.4.0.2 -s 10.2.0.0/19 -p udp --dport 389 -j ACCEPT
 # Allow Access to Squid Proxy from Staff Network, Database and IDMZ
 iptables -A FORWARD -i eth0 -s 10.2.0.0/19,10.4.0.6/29,10.6.0.1/29 -p tcp -m multiport --dports 3128,3129 -d 10.4.0.3 -j ACCEPT
+
