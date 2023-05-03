@@ -5,19 +5,18 @@ ip addr add 10.2.11.254/22 dev eth3
 ip addr add 10.2.15.254/22 dev eth4
 ip addr add 10.2.19.254/22 dev eth5
 
-ip link set up dev eth0
-ip link set up dev eth1
-ip link set up dev eth2
-ip link set up dev eth3
-ip link set up dev eth4
-ip link set up dev eth5
+ip link set up dev eth0 # Main Firewall
+ip link set up dev eth1 # HR
+ip link set up dev eth2 # CC
+ip link set up dev eth3 # SA
+ip link set up dev eth4 # FI
+ip link set up dev eth5 # PR
 
 ip route add default via 10.0.0.14 dev eth0
 
 iptables -F 
 iptables -P FORWARD DROP
 iptables -P INPUT DROP
-
 
 # Stateful firewall rules
 iptables -A INPUT -m state --state ESTABLISHED,RELATED -j ACCEPT
@@ -30,8 +29,8 @@ iptables -A FORWARD -o eth3 -s 10.3.0.0/29 -j DROP
 iptables -A FORWARD -o eth3 -s 10.4.0.0/29 -j DROP
 
 # Forward internal traffic out
-iptables -A FORWARD -o eth0 -j ACCEPT
-# Forward traffic to printers
+iptables -A FORWARD -o eth0 -d 10.0.0.0/8 -j ACCEPT
+# Only forward traffic to printers from staff machines
 iptables -A FORWARD -i eth0 -o eth5 -j DROP
 iptables -A FORWARD -o eth5 -j ACCEPT
 
