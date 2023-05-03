@@ -19,8 +19,8 @@ iptables -A INPUT -i eth1 -j ACCEPT
 iptables -A FORWARD -i eth1 -j ACCEPT
 
 # Block web traffic (use squid proxy instead)
-iptables -A FORWARD -p tcp --dport 80 -j DROP
-iptables -A FORWARD -p tcp --dport 443 -j DROP
+iptables -A FORWARD -o eth0 -p tcp --dport 80 -j DROP
+iptables -A FORWARD -o eth0 -p tcp --dport 443 -j DROP
 
 
 # Stateful firewall rules
