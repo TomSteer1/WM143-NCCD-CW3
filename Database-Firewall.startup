@@ -11,8 +11,7 @@ iptables -P OUTPUT DROP
 
 # Allow all traffic from the internal network
 iptables -A INPUT -i eth1 -j ACCEPT
-# Don't allow traffic to the internet (unless via proxy)
-iptables -A FORWARD -o eth0 -d 10.0.0.0/8 -j ACCEPT
+iptables -A FORWARD -i eth1 -j ACCEPT
 
 # Stateful firewall rules
 iptables -A INPUT -m state --state ESTABLISHED,RELATED -j ACCEPT
