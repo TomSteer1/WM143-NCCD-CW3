@@ -16,7 +16,7 @@ for machine in $machines; do
 done
 echo "All machines tested" 1>&2
 echo "Waiting for machines to finish" 1>&2
-# Wait for number of machines to equal number of files in _test
+#Wait for number of machines to equal number of files in _test
 while [ $(ls _test | wc -l) -ne $(vconnect -l | wc -l) ]; do
 	sleep 1
 done
@@ -31,6 +31,7 @@ echo "Machines stopped" 1>&2
 #done
 echo "Parsing results" 1>&2
 # Parse Results into arrays of machine names each represented by a bit in the result
+outputs=()
 ExtWWW=( ) # External Web Server
 ExtDNS=( ) # External DNS Server
 IntWWW=( ) # Internal Web Server
@@ -46,133 +47,46 @@ StaffCC=( ) # Staff CC Machine
 StaffSA=( ) # Staff SA Machine
 StaffFI=( ) # Staff FI Machine
 OpenVPN=( ) # OpenVPN Server
+machineNames=("External Web Server" "External DNS Server" "Internal Web Server" "Mail Server" "LDAP Server" "Internal DNS Server" "Squid Proxy" "Web Database" "Mail Database" "HR Database" "Staff HR Machine" "Staff CC Machine" "Staff SA Machine" "Staff FI Machine" "OpenVPN Server")
+length=${#machineNames[@]}
 for machine in $machines; do
 	machine=${machine%:}
 	result=$(cat _test/$machine.txt)
-	if [ ${result:0:1} -eq 1 ]; then
-		ExtWWW+=($machine)
-	fi
-	if [ ${result:1:1} -eq 1 ]; then
-		ExtDNS+=($machine)
-	fi
-	if [ ${result:2:1} -eq 1 ]; then
-		IntWWW+=($machine)
-	fi
-	if [ ${result:3:1} -eq 1 ]; then
-		Mail+=($machine)
-	fi
-	if [ ${result:4:1} -eq 1 ]; then
-		LDAP+=($machine)
-	fi
-	if [ ${result:5:1} -eq 1 ]; then
-		IntDNS+=($machine)
-	fi
-	if [ ${result:6:1} -eq 1 ]; then
-		Squid+=($machine)
-	fi
-	if [ ${result:7:1} -eq 1 ]; then
-		WebDB+=($machine)
-	fi
-	if [ ${result:8:1} -eq 1 ]; then
-		MailDB+=($machine)
-	fi
-	if [ ${result:9:1} -eq 1 ]; then
-		HrDB+=($machine)
-	fi
-	if [ ${result:10:1} -eq 1 ]; then
-		StaffHR+=($machine)
-	fi
-	if [ ${result:11:1} -eq 1 ]; then
-		StaffCC+=($machine)
-	fi
-	if [ ${result:12:1} -eq 1 ]; then
-		StaffSA+=($machine)
-	fi
-	if [ ${result:13:1} -eq 1 ]; then
-		StaffFI+=($machine)
-	fi
-	if [ ${result:14:1} -eq 1 ]; then
-		OpenVPN+=($machine)
+	for (( j=0; j<${length}; j++ ));
+	do
+		if [ ${result:$j:1} -eq 1 ]; then
+			outputs[$j]="${outputs[$j]}$machine "
+		fi
+	done
+done
+
+echo "Test run on ${#machines[@]} machines" > _test/results.txt
+echo "The following services can be accessed by:" | tee _test/results.txt
+for (( j=0; j<${length}; j++ ));
+do
+	echo "${machineNames[$j]}: ${outputs[$j]}" | tee -a _test/results.txt
+done
+
+# Pings what each machine can ping
+echo "Pinging machines" | tee -a _test/results.txt
+machineNames=("Ext-DNS" "Ext-Office" "Ext-WWW" "Database" "Int-DNS" "Internal WWW" "LDAP" "Mail" "OpenVPN" "Squid" "Staff-CC" "Staff-FI" "Staff-HR" "Staff-SA" "Staff-Printer")
+length=${#machineNames[@]}
+for machine in $machines; do 
+	machine=${machine%:}
+	result=$(cat _test/$machine.txt)
+	pings="" 
+	offset=15
+	for (( j=0; j<${length}; j++ ));
+	do
+		if [ ${result:$j+$offset:1} -eq 1 ]; then
+			pings+="${machineNames[$j]} "
+		fi
+	done
+	if [ ${#pings} -ne 0 ]; then
+		echo "$machine can ping: ${pings}" | tee -a _test/results.txt
 	fi
 done
-# Prints what machines can be accessed by
-# Checks if length of array is equal to number of machines
-count=$(ls _test | wc -l)
-echo "Test run with $count machines" > _test/results.txt
-if [ ${#ExtWWW[@]} -eq $count ]; then
-	echo "External Web Server can be accessed by all machines" | tee -a _test/results.txt
-else
-	echo "External Web Server can be accessed by ${ExtWWW[@]}" | tee -a _test/results.txt
-fi
-if [ ${#ExtDNS[@]} -eq $count ]; then
-	echo "External DNS Server can be accessed by all machines" | tee -a _test/results.txt
-else
-	echo "External DNS Server can be accessed by ${ExtDNS[@]}" | tee -a _test/results.txt
-fi
-if [ ${#IntWWW[@]} -eq $count ]; then
-	echo "Internal Web Server can be accessed by all machines" | tee -a _test/results.txt
-else
-	echo "Internal Web Server can be accessed by ${IntWWW[@]}" | tee -a _test/results.txt
-fi
-if [ ${#Mail[@]} -eq $count ]; then
-	echo "Mail Server can be accessed by all machines" | tee -a _test/results.txt
-else
-	echo "Mail Server can be accessed by ${Mail[@]}" | tee -a _test/results.txt
-fi
-if [ ${#LDAP[@]} -eq $count ]; then
-	echo "LDAP Server can be accessed by all machines" | tee -a _test/results.txt
-else
-	echo "LDAP Server can be accessed by ${LDAP[@]}" | tee -a _test/results.txt
-fi
-if [ ${#IntDNS[@]} -eq $count ]; then
-	echo "Internal DNS Server can be accessed by all machines" | tee -a _test/results.txt
-else
-	echo "Internal DNS Server can be accessed by ${IntDNS[@]}" | tee -a _test/results.txt
-fi
-if [ ${#Squid[@]} -eq $count ]; then
-	echo "Squid Proxy can be accessed by all machines" | tee -a _test/results.txt
-else
-	echo "Squid Proxy can be accessed by ${Squid[@]}" | tee -a _test/results.txt
-fi
-if [ ${#WebDB[@]} -eq $count ]; then
-	echo "Web Database can be accessed by all machines" | tee -a _test/results.txt
-else
-	echo "Web Database can be accessed by ${WebDB[@]}" | tee -a _test/results.txt
-fi
-if [ ${#MailDB[@]} -eq $count ]; then
-	echo "Mail Database can be accessed by all machines" | tee -a _test/results.txt
-else
-	echo "Mail Database can be accessed by ${MailDB[@]}" | tee -a _test/results.txt
-fi
-if [ ${#HrDB[@]} -eq $count ]; then
-	echo "HR Database can be accessed by all machines" | tee -a _test/results.txt
-else
-	echo "HR Database can be accessed by ${HrDB[@]}" | tee -a _test/results.txt
-fi
-if [ ${#StaffHR[@]} -eq $count ]; then
-	echo "Staff HR Machine can be accessed by all machines" | tee -a _test/results.txt
-else
-	echo "Staff HR Machine can be accessed by ${StaffHR[@]}" | tee -a _test/results.txt
-fi
-if [ ${#StaffCC[@]} -eq $count ]; then
-	echo "Staff Corporate Comms Machine can be accessed by all machines" | tee -a _test/results.txt
-else
-	echo "Staff Corporate Comms Machine can be accessed by ${StaffCC[@]}" | tee -a _test/results.txt
-fi
-if [ ${#StaffSA[@]} -eq $count ]; then
-	echo "Staff System Admin Machine can be accessed by all machines" | tee -a _test/results.txt
-else
-	echo "Staff System Admin Machine can be accessed by ${StaffSA[@]}" | tee -a _test/results.txt
-fi
-if [ ${#StaffFI[@]} -eq $count ]; then
-	echo "Staff Finance Machine can be accessed by all machines" | tee -a _test/results.txt
-else
-	echo "Staff Finance Machine can be accessed by ${StaffFI[@]}" | tee -a _test/results.txt
-fi
-if [ ${#OpenVPN[@]} -eq $count ]; then
-	echo "OpenVPN Server can be accessed by all machines" | tee -a _test/results.txt
-else
-	echo "OpenVPN Server can be accessed by ${OpenVPN[@]}" | tee -a _test/results.txt
-fi
+
+
 echo "Done" 1>&2
 echo "Results can also be found in _test/results.txt" 1>&2
