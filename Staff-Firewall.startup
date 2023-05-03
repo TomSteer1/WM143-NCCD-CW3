@@ -17,6 +17,7 @@ ip route add default via 10.0.0.14 dev eth0
 iptables -F 
 iptables -P FORWARD DROP
 iptables -P INPUT DROP
+iptables -P OUTPUT DROP
 
 # Stateful firewall rules
 iptables -A INPUT -m state --state ESTABLISHED,RELATED -j ACCEPT

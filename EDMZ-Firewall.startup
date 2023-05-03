@@ -9,6 +9,7 @@ ip route add 10.3.0.0/22 via 10.1.0.3 dev eth1
 iptables -F 
 iptables -P FORWARD DROP
 iptables -P INPUT DROP
+iptables -P OUTPUT DROP
 
 # Allow all traffic from the internal network
 iptables -A FORWARD -i eth1 -j ACCEPT
