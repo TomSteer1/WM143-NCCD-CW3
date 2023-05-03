@@ -1,4 +1,4 @@
-$TTL	604800
+eTTL	604800
 @	IN	SOA 	fido22.cyber.test (
 	3
 	604800
