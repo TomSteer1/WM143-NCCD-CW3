@@ -24,6 +24,10 @@ iptables -P OUTPUT DROP
 iptables -A INPUT -m state --state ESTABLISHED,RELATED -j ACCEPT
 iptables -A FORWARD -m state --state ESTABLISHED,RELATED -j ACCEPT
 
+# Block web traffic (use squid proxy instead)
+iptables -A FORWARD -p tcp --dport 80 -j DROP
+iptables -A FORWARD -p tcp --dport 443 -j DROP
+
 # Block access to the management zone from anything except database zone
 iptables -A FORWARD -o eth3 -s 10.1.0.0/29 -j DROP
 iptables -A FORWARD -o eth3 -s 10.2.0.0/29 -j DROP
