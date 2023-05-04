@@ -7,11 +7,13 @@ $TTL    60000
                         0 ; negative cache ttl
                         )
 @               IN      NS      dns.fido22.cyber.test.
-dns          IN      A       10.4.0.1
 www		IN	A	10.1.0.1
 @ IN A 10.1.0.1
-squid IN A 10.4.0.3
 mail IN A 10.1.0.2 
 vpn IN A 10.1.0.3
+
+dns          IN      A       10.4.0.1
 ldap IN A 10.4.0.2
+squid IN A 10.4.0.3
+
 mysql IN A 10.6.0.1

@@ -1,0 +1,23 @@
+; reverse lookup database 
+$TTL    1
+@               IN      SOA     1.0.4.10.in-addr.arpa.    nobody.nowhere. (
+                        2006031201 ; serial
+                        28 ; refresh
+                        14 ; retry
+                        3600000 ; expire
+                        0 ; negative cache ttl 
+                        )
+@                            IN      NS      1.0.4.10.in-addr.arpa.
+1.0.4.10.in-addr.arpa.    IN      A       10.4.0.1
+; IDMZ
+1.0.4          PTR        dns.fido22.cyber.test.
+2.0.4				PTR        ldap.fido22.cyber.test.
+3.0.4				PTR        squid.fido22.cyber.test.
+; EDMZ
+1.0.1        PTR        www.fido22.cyber.test.
+2.0.1        PTR        mail.fido22.cyber.test.
+3.0.1        PTR        vpn.fido22.cyber.test.
+; Database
+1.0.6				PTR        mysql.fido22.cyber.test.
+
+
