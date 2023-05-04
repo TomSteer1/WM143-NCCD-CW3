@@ -13,7 +13,8 @@ iptables -A INPUT -m state --state ESTABLISHED,RELATED -j ACCEPT
 iptables -A INPUT --protocol udp --dport 53 -j ACCEPT
 
 chmod +r /etc/dnsmasq_static_hosts.conf
-systemctl start dnsmasq
+#systemctl start dnsmasq
+systemctl start named
 
 
 

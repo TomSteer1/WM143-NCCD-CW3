@@ -24,6 +24,9 @@ iptables -F
 iptables -P FORWARD DROP
 iptables -P INPUT DROP
 
+# Block DNS from everything but Int-DNS
+iptables -A FORWARD -o eth1 -p udp ! -s 10.4.0.1 --dport 53 -j DROP
+
 # Allow icmp from System Admins
 iptables -A INPUT -p icmp -s 10.2.8.1/22 -j ACCEPT
 
